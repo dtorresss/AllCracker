@@ -12,16 +12,16 @@ int main(int argc, char **argv)
 	{
         	ptr = fopen(argv[2], "r");
         	if (NULL == ptr) {
-                	printf("File can't be opened, try again with another file.\n");
+                	printf("Error al abrir el diccionario, prueba con otro.\n");
         	}
 		if (strcmp(argv[3], "MD5") == 0)
 			md5Crack(len, read, ptr, line, argv[1]);
 		if (strcmp(argv[3], "SHA256") == 0)
 			sha256Crack(len, read, ptr, line, argv[1]);
 		else
-			printf("We havent implemented that hash yet, try another one\n");
+			printf("No hemos implementado ese algoritmo aún.\n");
 		return (0);
 	}
-	printf("Check all the params again.\n");
+	printf("Checkea los parámetros!\n");
 	return (0);
 }

@@ -172,13 +172,13 @@ void sha256Crack(size_t len, ssize_t read, FILE *ptr, char *line, char *hash)
                 	line[read-1] = 0;
         	if ((read - 1 > 0) && strcmp(SHA256(line), hash) == 0)
                 {
-			printf("Hash Cracked!: %s = %s\n", hash, line);
+			printf("Hash Crackeado!: %s = %s\n", hash, line);
                         cracked = 1;
                         break;
                 }
         }
         if (cracked == 0)
-		printf("The Cracking has failed, try another dictionary");
+		printf("El crackeo ha fallado, prueba otro diccionario");
                 fclose(ptr);
         if (line)
 		free(line);
