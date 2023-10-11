@@ -13,6 +13,7 @@ int main(int argc, char **argv)
         	ptr = fopen(argv[2], "r");
         	if (NULL == ptr) {
                 	printf("Error al abrir el diccionario, prueba con otro.\n");
+			return (0);
         	}
 		if (strcmp(argv[3], "MD5") == 0)
 			md5Crack(len, read, ptr, line, argv[1]);
