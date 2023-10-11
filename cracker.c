@@ -1,7 +1,5 @@
 #include "md5.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "sha256.h"
 
 int main(int argc, char **argv)
 {
@@ -9,29 +7,21 @@ int main(int argc, char **argv)
         char * line = NULL;
         size_t len = 0;
         ssize_t read;
-        int lenL = 0;
         int cracked = 0;
-
-        ptr = fopen(argv[2], "r");
-        if (NULL == ptr) {
-                printf("File can't be opened, try again with another file.\n");
-        }
-        while ((read = getline(&line, &len, ptr)) != -1) {
-                lenL = strlen(line);
-                if(line[lenL-1] == '\n')
-                        line[lenL-1] = 0;
-                if ((lenL - 1 > 0) && strcmp(md5(line, lenL), argv[1]) == 0)
-                {
-                        printf("Hash Cracked!: %s = %s\n", argv[1], line);
-                        cracked = 1;
-                        break;
-                }
-        }
-        if (cracked == 0)
-                printf("The Cracking has failed, try another dictionary");
-        fclose(ptr);
-        if (line)
-                free(line);
-        exit(EXIT_SUCCESS);
-        return 0;
+	if (argc == 4)
+	{
+        	ptr = fopen(argv[2], "r");
+        	if (NULL == ptr) {
+                	printf("File can't be opened, try again with another file.\n");
+        	}
+		if (strcmp(argv[3], "MD5") == 0)
+			md5Crack(len, read, ptr, line, argv[1]);
+		if (strcmp(argv[3], "SHA256") == 0)
+			sha256Crack(len, read, ptr, line, argv[1]);
+		else
+			printf("We havent implemented that hash yet, try another one\n");
+		return (0);
+	}
+	printf("Check all the params again.\n");
+	return (0);
 }

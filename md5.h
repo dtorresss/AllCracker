@@ -123,5 +123,25 @@ char* md5(const char *msg, int mlen) {
         }
         return result;
 }
+void md5Crack(size_t len, ssize_t read, FILE *ptr, char *line, char *hash) {
+	int cracked = 0;
+
+	while ((read = getline(&line, &len, ptr)) != -1) {
+                if(line[read-1] == '\n')
+                	line[read-1] = 0;
+        	if ((read - 1 > 0) && strcmp(md5(line, read), hash) == 0)
+                {
+			printf("Hash Cracked!: %s = %s\n", hash, line);
+                        cracked = 1;
+                        break;
+                }
+        }
+        if (cracked == 0)
+		printf("The Cracking has failed, try another dictionary");
+                fclose(ptr);
+        if (line)
+		free(line);
+        exit(EXIT_SUCCESS);
+}
 #define _MD5_H_
 #endif
