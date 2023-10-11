@@ -1,7 +1,7 @@
 # AllCracker #
 
 ## Compilación: ## 
-`gcc crack.c -o cracker -lm`
+`gcc cracker.c -o cracker -lm`
 
 ## Uso ##
 `./cracker hash wordlist`
